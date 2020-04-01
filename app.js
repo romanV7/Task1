@@ -7,7 +7,6 @@ const jwt = require('jsonwebtoken')
 
 const coursesRoutes = require('./api/routes/courses')
 
-
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 

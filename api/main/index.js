@@ -6,13 +6,27 @@ const fs = require('fs')
 
 const newZip = new jszip()
 
+const Connect = require('../../connection')
+
 const show = async () => {
   const data = await fetch('http://api.bestchange.ru/info.zip')
   const buffer = await data.arrayBuffer()
   const { files } = await newZip.loadAsync(buffer)
   const matched = files['bm_rates.dat']
   const string = await matched.async('string')
-  return sort(string)
+  const query = sort(string)
+
+  try {
+    const url = 'mongodb://localhost:27017'//process.env.MONGO_URL  //
+    const db = await Connect.connectToDb(url)
+    const collection = db.collection("collection");
+    await collection.insertOne({ ...query })
+    console.log('Connected successfully to database')
+    console.log('Successfully saved to database')
+
+  } catch (e) {
+    console.log(e)
+  }
 }
 
 const sort = str => {
