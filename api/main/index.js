@@ -21,7 +21,7 @@ const show = async () => {
       const url = 'mongodb://localhost:27017'//process.env.MONGO_URL  //
       const [ db, client ] = await Connect.connectToDb(url)
       const collection = db.collection("collection");
-      await collection.insertOne({ ...data })
+      await collection.insertMany(data)
       console.log('Connected successfully to database')
       console.log('Successfully saved to database')
       await client.close()
