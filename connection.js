@@ -10,5 +10,5 @@ module.exports.connectToDb = async url => {
   }
 
   const db = client.db("db");
-  return db;
+  return [ db, client ]
 };
