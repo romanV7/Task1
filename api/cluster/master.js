@@ -19,8 +19,8 @@ const start = string => {
   const total = arr.length
   const tasks = Helpers.chunkArray(arr, 2, 8)
   let counter = 0
-  
-  const results = []
+
+  let results = []
   for (const worker of workers) {
     const task = tasks.pop()
     if (!task) return
@@ -35,8 +35,9 @@ const start = string => {
       results.push(...message)
       console.log(results.length, '/', total)
       if (counter === workers.length) {
+        const sorted = Helpers.sortAgain(results)
         console.log({ total, unique: results.length })
-        process.emit('sorted', results)
+        process.emit('sorted', sorted)
       }
     })
   }

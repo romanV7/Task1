@@ -1,6 +1,6 @@
 'use strict'
 
-function chunkArray(arr, elementsByPart, clientsCount) {
+const chunkArray = (arr, elementsByPart, clientsCount) => {
   const { length } = arr
   const tasks = []
   let needWorkers = length / elementsByPart
@@ -20,4 +20,14 @@ function chunkArray(arr, elementsByPart, clientsCount) {
   return tasks
 }
 
-module.exports.chunkArray = chunkArray
+
+const sortAgain = arr =>
+  arr.sort((a, b) => (a['stuff'] > b['stuff'] ? -1 : 1))
+  .filter(
+    (thing, index, self) => index === self.findIndex(
+      t =>  t['receivedId'] === thing['receivedId'] && t['gottonId'] === thing['gottonId']
+    )
+  )
+
+
+module.exports = { chunkArray, sortAgain }
