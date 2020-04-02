@@ -6,7 +6,7 @@ const fs = require('fs')
 
 const newZip = new jszip()
 
-const Connect = require('../../connection')
+const Connect = require('../../database')
 const Master = require('../cluster/master.js')
 
 const show = async () => {
@@ -18,19 +18,20 @@ const show = async () => {
   Master.start(string)
   process.on('sorted', async data => {
     try {
-      const url = 'mongodb://localhost:27017'//process.env.MONGO_URL  //
-      const [ db, client ] = await Connect.connectToDb(url)
-      const collection = db.collection("collection");
-      await collection.insertMany(data)
-      console.log('Connected successfully to database')
-      console.log('Successfully saved to database')
-      await client.close()
-      console.log('Connection closed')
-      process.exit(0)
+      const url = 'mongodb://localhost:27017/db'//process.env.MONGO_URL  //
+      Connect.connect(url, async (err, db) => {
+        if (err) throw err
+        const collection = db.collection("collection");
+        await collection.insertMany(data)
+        console.log('Connected successfully to database')
+        console.log('Successfully saved to database')
+        process.emit('run')
+      })
     } catch (e) {
       console.log(e)
     }
   })
+  process.on('run', () => require('../../server'))
 }
 
 show()

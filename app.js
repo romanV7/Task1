@@ -3,7 +3,6 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const jwt = require('jsonwebtoken')
 
 const coursesRoutes = require('./api/routes/courses')
 

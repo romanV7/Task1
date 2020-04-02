@@ -3,15 +3,9 @@
 const express = require('express')
 const router = express.Router()
 
-// TODO middleware jwt
-const sign = require('../middleware/Signature')
+const Controller = require('../controllers/controller')
 
-router.get('/', (req, res) => {
-  const headers = req.headers.cookie
-  console.log(headers)
-  res.send(headers)
-})
-
-router.get('/:send_currency/:receive_currency', (req, res) => {})
+router.get('/', Controller.getAllCourses)
+router.get('/:send_currency/:receive_currency', Controller.getUniquePair)
 
 module.exports = router
