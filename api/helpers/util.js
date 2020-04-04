@@ -20,14 +20,12 @@ const chunkArray = (arr, elementsByPart, clientsCount) => {
   return tasks
 }
 
-
 const sortAgain = arr =>
   arr.sort((a, b) => (a['stuff'] > b['stuff'] ? -1 : 1))
   .filter(
     (thing, index, self) => index === self.findIndex(
-      t =>  t['receivedId'] === thing['receivedId'] && t['gottonId'] === thing['gottonId']
+      t =>  t['receivedId'] === thing['receivedId'] && t['gottenId'] === thing['gottenId']
     )
   )
-
 
 module.exports = { chunkArray, sortAgain }

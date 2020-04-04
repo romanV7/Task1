@@ -2,12 +2,12 @@
 
 const db = require('../../database')
 
-module.exports.findAll = callback =>
-  db.get().collection("collection").find().toArray((err, result) =>
+module.exports.findUniquePair = (query, callback) =>
+  db.get().collection("collection").find(query).toArray((err, result) =>
     callback(err, result)
   )
 
-module.exports.findUniquePair = (query, callback) =>
-  db.get().collection("collection").find(query).toArray((err, result) =>
+module.exports.findAll = callback =>
+  db.get().collection("collection").find().toArray((err, result) =>
     callback(err, result)
   )

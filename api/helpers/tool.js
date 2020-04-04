@@ -1,7 +1,6 @@
 'use strict'
 
-
-const dataset = ['receivedId', 'gottonId', 'companyId', 'currIn', 'currOut', 'stuff', 'bob', 'rob']
+const dataset = ['receivedId', 'gottenId', 'companyId', 'currIn', 'currOut', 'stuff', 'key', 'key_']
 
 const workerTask = message => {
   const { task } = message
@@ -10,12 +9,10 @@ const workerTask = message => {
   const res = sorted.filter((thing, index, self) => index === self.findIndex(t => t[0] === thing[0] && t[1] === thing[1]))
   const rr_ = (i = 0) => res.map(array => array.map((elem, i) => ({ [dataset[i++]]: elem })))
 
-
   const a = []
   for (let i = 0, { length } = res; i < length; i++) {
     a.push( Object.assign(...rr_()[i], {}))
   }
-  //console.log(a)
   process.send(a)
 }
 

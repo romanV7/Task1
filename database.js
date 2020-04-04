@@ -8,7 +8,6 @@ const connect = (url, callback) => {
   MongoClient.connect(url,{ useUnifiedTopology: true }, (err, client) => {
     if (err) return callback(err)
     state.db = client.db("db")
-    console.log(state.db)
     return callback(null, state.db)
   })
 }
