@@ -11,7 +11,7 @@ Second part:
                                                                                                                            
 Write a REST API for getting all the profitable courses, so that realize two methods:                                     
 -`GET/courses`- getting all the courses with filtering: sent currency and received currency.                              
--`GET/course/send_currency/recive_currency`- obviously                                                                 
+-`GET/course/getPair/send_currency/recive_currency`- obviously                                                                 
 
 For convenience, a minimum UI with forms are provided.
 
@@ -49,7 +49,7 @@ Response:
    - `receivedId`: course unique receivedId,
    - `gottenId`: course unique gottonId,
    
-## `/course/send_currency/recive_currency`
+## `/course/getPair/send_currency/recive_currency`
 Route to get, according to received params, the most favorable rate for each currency pair 
 
 Parameters:
