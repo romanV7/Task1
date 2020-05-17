@@ -6,25 +6,36 @@ const md5 = require('blueimp-md5')
 
 module.exports.getAllCourses = (req, res) => {
   Courses.findAll((err, docs) => {
-    if (err) return res.status(500).json({ error: err })
-    return res.status(200).json(docs)
+    if (err) return res.statusCode = 500
+    res.statusCode = 200
+    res.setHeader('Content-Type', 'application/json')
+    return res.end(JSON.stringify(docs))
   })
 }
 
 module.exports.getUniquePair = (req, res) => {
-  let { send_currency, receive_currency } = req.params
+  let [send_currency, receive_currency]  = [req.url.split('/')[3], req.url.split('/')[4]]
   const { base64 } = req.headers
-  console.log({ send_currency, receive_currency, base64 })
   const concatenated = [send_currency, receive_currency, process.env.IV].join(':')
   const hash = md5(concatenated)
   const base64_server = Buffer.from(hash).toString('base64')
-  if (base64_server !== base64) return res.status(200).json({ message: "Access denided: Checksum does not match " })
+  if (base64_server !== base64) {
+    res.statusCode = 401
+    return res.end(JSON.stringify({ message: "Access denided: Checksum does not match" }))
+  }
   const receivedId = Number(send_currency)
   const gottenId = Number(receive_currency)
   Courses.findUniquePair({ receivedId, gottenId }, (err, doc) => {
-    console.log(doc)
-    if (err) return res.status(500).json({ error: err })
-    if (doc.length === 0) return res.status(404).json({ message: "Pair not found try another one" })
-    return res.status(200).json(doc)
+    if (err) {
+      res.statusCode = 500
+      return res.end(JSON.stringify({ error: err  }))
+    }
+    if (doc.length === 0) {
+      res.statusCode = 404
+      return res.end(JSON.stringify({ message: "Pair not found try another one" }))
+    }
+    res.statusCode = 200
+    res.setHeader('Content-Type', 'application/json')
+    return res.end(JSON.stringify(doc))
   })
 }

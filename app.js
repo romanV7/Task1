@@ -1,15 +1,13 @@
 'use strict'
 
-const express = require('express')
-const app = express()
-const bodyParser = require('body-parser')
-const cors = require('cors')
-const coursesRoutes = require('./api/routes/courses')
+const Controller = require('./api/controllers/controller')
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-app.use(cors())
-
-app.use('/courses', coursesRoutes)
+const app = (request, response) => {
+  const { headers, method, url } = request
+  if (url === '/courses/getAllCourses') return Controller.getAllCourses(request, response)
+  if (url.includes('/courses/getPair')) return Controller.getUniquePair(request, response)
+  response.statusCode = 404
+  return response.end(JSON.stringify({ message: "No such rout" }))
+}
 
 module.exports = app
