@@ -16,8 +16,8 @@ Write a REST API for getting all the profitable courses, so that realize two met
 For convenience, a minimum UI with forms are provided.
 
 ## Installation
-- `git clone https://github.com/romanV7/romanV7`
-- `cd Task && npm i`
+- `git clone https://github.com/romanV7/Course_Parser.git`
+- `cd Course_Parser && npm i`
 - `npm run start`
 
 # Notice:
