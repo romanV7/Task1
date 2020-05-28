@@ -21,7 +21,7 @@
       function testing() {
         const url = 'http://localhost:3000/courses/getAllCourses'
 
-        fetch(url, { method: 'GET', mode: 'cors' })
+        fetch(url, { mode: 'cors' })
           .then(data => data.json())
           .then(data => console.log(data))
           .catch(e => {})
@@ -41,7 +41,7 @@
         const base64 = window.btoa(hash)
 
         const options = {
-          method: 'GET', mode: 'cors',
+          mode: 'cors',
           headers: { base64 }
         }
 

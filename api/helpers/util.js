@@ -20,12 +20,10 @@ const chunkArray = (arr, elementsByPart, clientsCount) => {
   return tasks
 }
 
-const sortAgain = arr =>
-  arr.sort((a, b) => (a['stuff'] > b['stuff'] ? -1 : 1))
-  .filter(
-    (thing, index, self) => index === self.findIndex(
-      t =>  t['receivedId'] === thing['receivedId'] && t['gottenId'] === thing['gottenId']
-    )
-  )
+const sortFn = (a, b) => (a['stuff'] > b['stuff'] ? -1 : 1)
+const findIndexFn = t =>  t['receivedId'] === thing['receivedId'] && t['gottenId'] === thing['gottenId']
+const finterFn = (thing, index, self) => index === self.findIndex(findIndexFn)
+
+const sortAgain = arr => arr.sort(sortFn).filter(finterFn)
 
 module.exports = { chunkArray, sortAgain }

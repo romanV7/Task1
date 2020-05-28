@@ -5,15 +5,19 @@ const dataset = ['receivedId', 'gottenId', 'companyId', 'currIn', 'currOut', 'st
 const workerTask = message => {
   const { task } = message
   const newarr = task.map(el => el.split(";").map(el => parseFloat(el)))
-  const sorted = newarr.sort((a, b) => (a[4] > b[4] ? -1 : 1))
-  const res = sorted.filter((thing, index, self) => index === self.findIndex(t => t[0] === thing[0] && t[1] === thing[1]))
-  const rr_ = (i = 0) => res.map(array => array.map((elem, i) => ({ [dataset[i++]]: elem })))
+  const sortFn = (a, b) => (a[4] > b[4] ? -1 : 1)
+  const findIndexFn = t => t[0] === thing[0] && t[1] === thing[1]
+  const filterFn = (thing, index, self) => index === self.findIndex(findIndexFn)
+  const mapper = array => array.map((elem, i) => ({ [dataset[i++]]: elem }))
+  const sorted = newarr.sort(sortFn)
+  const res = sorted.filter(filterFn)
+  const convert = (i = 0) => res.map(mapper)
 
-  const a = []
+  const array = []
   for (let i = 0, { length } = res; i < length; i++) {
-    a.push( Object.assign(...rr_()[i], {}))
+    array.push(Object.assign(...convert()[i], {}))
   }
-  process.send(a)
+  process.send(array)
 }
 
 module.exports = { workerTask }

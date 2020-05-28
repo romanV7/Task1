@@ -14,7 +14,8 @@ module.exports.getAllCourses = (req, res) => {
 }
 
 module.exports.getUniquePair = (req, res) => {
-  let [send_currency, receive_currency]  = [req.url.split('/')[3], req.url.split('/')[4]]
+  const send_currency = req.url.split('/')[3]
+  const receive_currency = req.url.split('/')[4]
   const { base64 } = req.headers
   const concatenated = [send_currency, receive_currency, process.env.IV].join(':')
   const hash = md5(concatenated)
@@ -23,8 +24,8 @@ module.exports.getUniquePair = (req, res) => {
     res.statusCode = 401
     return res.end(JSON.stringify({ message: "Access denided: Checksum does not match" }))
   }
-  const receivedId = Number(send_currency)
-  const gottenId = Number(receive_currency)
+  const receivedId = parseInt(send_currency)
+  const gottenId = parseInt(receive_currency)
   Courses.findUniquePair({ receivedId, gottenId }, (err, doc) => {
     if (err) {
       res.statusCode = 500

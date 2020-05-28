@@ -2,14 +2,19 @@
 
 const Controller = require('./api/controllers/controller')
 
+const router = {
+  '/courses/getAllCourses': (request, response) => Controller.getAllCourses(request, response)
+  '/courses/getPair': (request, response) => Controller.getUniquePair(request, response)
+}
+
 const app = (request, response) => {
   response.setHeader('Content-Type', 'application/json')
   response.setHeader('Access-Control-Allow-Origin', '*')
   const { headers, method, url } = request
-  if (url === '/courses/getAllCourses') return Controller.getAllCourses(request, response)
-  if (url.includes('/courses/getPair')) return Controller.getUniquePair(request, response)
+  const sendRequest = router[url]
+  sendRequest(request, response)
   response.statusCode = 404
-  return response.end(JSON.stringify({ message: "No such rout" }))
+  return response.end(JSON.stringify({ message: "No such route" }))
 }
 
 module.exports = app
