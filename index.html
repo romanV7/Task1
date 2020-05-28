@@ -19,7 +19,7 @@
 
     <script>
       function testing() {
-        const url = 'http://localhost:3000/courses'
+        const url = 'http://localhost:3000/courses/getAllCourses'
 
         fetch(url, { method: 'GET', mode: 'cors' })
           .then(data => data.json())
