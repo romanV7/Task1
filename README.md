@@ -24,7 +24,7 @@ For convenience, a minimum UI with forms are provided.
 - Wait until the loading finishes, unless you won't be able to work with API! (This process takes approximately 4 minutes).
 - I used module cluster in order to divide the whole task between subprocesses to process faster.
 - When loading finishes, you can use API to get data.
-
+- Make sure that you have mongodb connected
 - Open browser and press Ctrl + O and choose file index.html for convenience (minimum UI forms) or create new tab and enter url provided below
 
 # API routes
