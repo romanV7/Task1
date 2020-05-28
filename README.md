@@ -25,10 +25,10 @@ For convenience, a minimum UI with forms are provided.
 - I used module cluster in order to divide the whole task between subprocesses to process faster.
 - When loading finishes, you can use API to get data.
 
-- Open browser and press Ctrl + O and choose file index.html for convenience (minimum UI forms)
+- Open browser and press Ctrl + O and choose file index.html for convenience (minimum UI forms) or create new tab and enter url provided below
 
 # API routes
-## `/courses`
+## `/courses/getAllCourses`
 Route for getting all the courses with filtering: sent currency and received currency.
 
 Parameters:
@@ -49,7 +49,7 @@ Response:
    - `receivedId`: course unique receivedId,
    - `gottenId`: course unique gottonId,
    
-## `/course/getPair/send_currency/recive_currency`
+## `/courses/getPair/send_currency/recive_currency`
 Route to get, according to received params, the most favorable rate for each currency pair 
 
 Parameters:
