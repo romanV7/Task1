@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node api/cluster/multicore"
+    "start": "node api/cluster/multicore",
+    "lint": "eslint"
   },
   "keywords": [],
   "author": "",
@@ -15,5 +16,8 @@
     "jszip": "^3.2.2",
     "mongodb": "^3.5.5",
     "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.1.0"
   }
 }
