@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-const cluster = require('cluster')
+const cluster = require('cluster');
 
-if (cluster.isMaster) require('../main/index')
-require('./worker.js')
+if (cluster.isMaster) require('../main/index');
+require('./worker.js');

@@ -1,5 +1,5 @@
-'use strict'
+'use strict';
 
-const Helpers = require('../helpers/tool.js')
+const Helpers = require('../helpers/tool.js');
 
-process.on('message', Helpers.workerTask)
+process.on('message', Helpers.workerTask);

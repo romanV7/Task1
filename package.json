@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node api/cluster/multicore",
-    "lint": "eslint"
+    "lint": "eslint --fix ./ || true"
   },
   "keywords": [],
   "author": "",
